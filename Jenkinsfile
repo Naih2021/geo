@@ -1,58 +1,33 @@
 pipeline {
     agent any
-
-    tools {
-        maven 'M2_HOME'
-    }
-
+tools {
+  maven 'M2_HOME'
+  }
     stages {
-        stage('Clean') {
+        stage('maven clean') {
             steps {
                 sh 'mvn clean'
             }
         }
-
-        stage('Install') {
+        stage('maven install') {
             steps {
                 sh 'mvn install'
             }
         }
-
-        stage('Compile') {
+        Stage('maven compile') {
             steps {
                 sh 'mvn compile'
             }
         }
-
-        stage('Test') {
+        Stage ('maven test') {
             steps {
                 sh 'mvn test'
             }
         }
-
-        stage('Package') {
+        stage('maven package') {
             steps {
                 sh 'mvn package'
             }
-        }
-
-        stage('SonarQube Analysis') {
-            steps {
-                script {
-                    withSonarQubeEnv('SonarQube Server') {
-                        sh 'mvn sonar:sonar'
-                    }
-                }
-            }
-        }
-    }
-
-    post {
-        success {
-            echo 'Build successful! Trigger additional steps here.'
-        }
-        failure {
-            echo 'Build failed! Take necessary actions for failure.'
         }
     }
 }
