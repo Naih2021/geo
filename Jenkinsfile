@@ -14,12 +14,12 @@ tools {
                 sh 'mvn install'
             }
         }
-        Stage('maven compile') {
+        stage('maven compile') {
             steps {
                 sh 'mvn compile'
             }
         }
-        Stage ('maven test') {
+        stage ('maven test') {
             steps {
                 sh 'mvn test'
             }
